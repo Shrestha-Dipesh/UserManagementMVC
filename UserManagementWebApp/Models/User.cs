@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace UserManagementWebApp.Models
 {
@@ -7,9 +8,12 @@ namespace UserManagementWebApp.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
         [Required]
+        [DisplayName("Last Name")]
         public string LastName { get; set; }
+        [DisplayName("Date of Birth")]
         public DateTime DateOfBirth { get; set; }
         public string? Gender { get; set; }
         public string? Address { get; set; }
