@@ -24,6 +24,7 @@
             <th>Date of Birth</th>
             <th>Gender</th>
             <th>Address</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -35,9 +36,15 @@
             <tr>
                 <td>@index</td>
                 <td>@user.FirstName @user.LastName</td>
-                <td>@user.DateOfBirth.ToShortDateString()</td>
+                <td>@user.DateOfBirth.ToString("MMMM dd, yyyy")</td>
                 <td>@user.Gender</td>
                 <td>@user.Address</td>
+                <td>
+                    <div class="btn-group d-flex" role="group">
+                        <a asp-controller="User" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-primary mx-1"><i class="bi bi-pencil me-2"></i>Edit</a>
+                        <a asp-controller="User" asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger mx-1"><i class="bi bi-trash3 me-2"></i>Delete</a>
+                    </div>
+                </td>
             </tr>
             index++;
         }

@@ -1,0 +1,42 @@
+﻿@model User
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Delete User</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="FirstName">First Name*</label>
+            <input asp-for="FirstName" class="form-control" placeholder="Enter first name" disabled />
+        </div>
+        <div class="mb-3">
+            <label asp-for="LastName">Last Name*</label>
+            <input asp-for="LastName" class="form-control" placeholder="Enter last name" disabled />
+        </div>
+        <div class="mb-3">
+            <label asp-for="DateOfBirth">Date of Birth*</label>
+            <input type="date" asp-for="DateOfBirth" class="form-control" max="@DateTime.Today.ToString("yyyy-MM-dd")" disabled />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Gender">Gender</label>
+            <select asp-for="Gender" class="form-select" disabled>
+                <option value="Default" selected disabled>--Select--</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Address">Address</label>
+            <input asp-for="Address" class="form-control" placeholder="Enter address" disabled />
+        </div>
+        <div class="row mb-3">
+            <div class="col-6">
+                <a asp-controller="User" asp-action="Index" class="btn btn-secondary" style="width:100px">Back</a>
+            </div>
+            <div class="col-6 text-end">
+                <button type="submit" class="btn btn-danger" style="width:100px">Delete</button>
+            </div>
+        </div>
+    </div>
+</form>

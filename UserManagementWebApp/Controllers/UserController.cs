@@ -41,5 +41,70 @@ namespace UserManagementWebApp.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public IActionResult Edit(int id)
+        {
+            if (id == 0)
+                return NotFound();
+
+            var user = _context.Users.Find(id);
+            if (user == null)
+                return NotFound();
+
+            if (user.Gender == "N/A")
+                user.Gender = null;
+
+            if (user.Address == "N/A")
+                user.Address = null;
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(User user)
+        {
+            if (!ModelState.IsValid)
+                return View(user);
+
+            if (user.Gender == null)
+                user.Gender = "N/A";
+
+            if (user.Address == null)
+                user.Address = "N/A";
+
+            _context.Users.Update(user);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            if (id == 0)
+                return NotFound();
+
+            var user = _context.Users.Find(id);
+            if (user == null)
+                return NotFound();
+
+            if (user.Gender == "N/A")
+                user.Gender = null;
+
+            if (user.Address == "N/A")
+                user.Address = null;
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(User user)
+        {
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }
