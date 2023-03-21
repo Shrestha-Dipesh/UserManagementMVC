@@ -39,6 +39,7 @@ namespace UserManagementWebApp.Controllers
 
             _context.Users.Add(user);
             _context.SaveChanges();
+            TempData["success"] = "User added successfully";
             return RedirectToAction("Index");
         }
 
@@ -75,6 +76,7 @@ namespace UserManagementWebApp.Controllers
 
             _context.Users.Update(user);
             _context.SaveChanges();
+            TempData["success"] = "User updated successfully";
 
             return RedirectToAction("Index");
         }
@@ -103,6 +105,7 @@ namespace UserManagementWebApp.Controllers
         {
             _context.Users.Remove(user);
             _context.SaveChanges();
+            TempData["success"] = "User deleted successfully";
 
             return RedirectToAction("Index");
         }
