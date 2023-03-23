@@ -1,21 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UserManagementWebApp.Data;
+using UserManagementWebApp.Interfaces;
 using UserManagementWebApp.Models;
 
 namespace UserManagementWebApp.Controllers
 {
     public class UserController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUserRepository _userRepository;
 
-        public UserController(ApplicationDbContext context)
+        public UserController(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
 
         public IActionResult Index()
         {
-            var users = _context.Users.ToList();
+            var users = _userRepository.GetAll();
             return View(users);
         }
 
@@ -37,8 +38,7 @@ namespace UserManagementWebApp.Controllers
             if (user.Address == null)
                 user.Address = "N/A";
 
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            _userRepository.Add(user);
             TempData["success"] = "User added successfully";
             return RedirectToAction("Index");
         }
@@ -48,7 +48,7 @@ namespace UserManagementWebApp.Controllers
             if (id == 0)
                 return NotFound();
 
-            var user = _context.Users.Find(id);
+            var user = _userRepository.GetById(id);
             if (user == null)
                 return NotFound();
 
@@ -74,8 +74,7 @@ namespace UserManagementWebApp.Controllers
             if (user.Address == null)
                 user.Address = "N/A";
 
-            _context.Users.Update(user);
-            _context.SaveChanges();
+            _userRepository.Update(user);
             TempData["success"] = "User updated successfully";
 
             return RedirectToAction("Index");
@@ -86,7 +85,7 @@ namespace UserManagementWebApp.Controllers
             if (id == 0)
                 return NotFound();
 
-            var user = _context.Users.Find(id);
+            var user = _userRepository.GetById(id);
             if (user == null)
                 return NotFound();
 
@@ -103,8 +102,7 @@ namespace UserManagementWebApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(User user)
         {
-            _context.Users.Remove(user);
-            _context.SaveChanges();
+            _userRepository.Delete(user);
             TempData["success"] = "User deleted successfully";
 
             return RedirectToAction("Index");
