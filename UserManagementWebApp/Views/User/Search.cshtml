@@ -1,0 +1,63 @@
+﻿@using UserManagementWebApp.ViewModels;
+@model UserSearchViewModel
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6 m-0 p-0">
+            <h4 class="text-primary">User List</h4>
+        </div>
+        <div class="col-6 text-end m-0 p-0">
+            <a asp-controller="User" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle me-2"></i>Add New User
+            </a>
+        </div>
+    </div>
+</div>
+<p class="text-muted mb-0 text-end">Search Keyword: @Model.Keyword</p>
+@if (Model.Users.Count > 0)
+{
+    <table class="table table-striped" id="userTable" style="width:100%">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>User Name</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int index = 1;
+            }
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>@index</td>
+                    <td>@user.FirstName @user.LastName</td>
+                    <td>@user.DateOfBirth.ToString("yyyy/MM/dd")</td>
+                    <td>@user.Gender</td>
+                    <td>@user.Address</td>
+                    <td>
+                        <div class="btn-group d-flex" role="group">
+                            <a asp-controller="User" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-primary mx-1"><i class="bi bi-pencil me-2"></i>Edit</a>
+                            <a asp-controller="User" asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger mx-1"><i class="bi bi-trash3 me-2"></i>Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                index++;
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="text-muted text-center">No users found</p>
+}
+
+<partial name="../Shared/_DataTable" />

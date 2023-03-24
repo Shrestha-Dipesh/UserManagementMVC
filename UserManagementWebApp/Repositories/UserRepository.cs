@@ -37,6 +37,12 @@ namespace UserManagementWebApp.Repositories
             return user;
         }
 
+        public List<User> GetByKeyword(string keyword)
+        {
+            var users = _context.Users.Where(u => u.FirstName.Contains(keyword) || u.LastName.Contains(keyword)).ToList();
+            return users;
+        }
+
         public bool Save()
         {
             var saved = _context.SaveChanges();

@@ -20,3 +20,7 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+th.sorting::before, th.sorting::after {
+    padding: 1px 0;
+}

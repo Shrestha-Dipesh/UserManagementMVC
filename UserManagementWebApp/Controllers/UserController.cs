@@ -2,6 +2,7 @@
 using UserManagementWebApp.Data;
 using UserManagementWebApp.Interfaces;
 using UserManagementWebApp.Models;
+using UserManagementWebApp.ViewModels;
 
 namespace UserManagementWebApp.Controllers
 {
@@ -106,6 +107,22 @@ namespace UserManagementWebApp.Controllers
             TempData["success"] = "User deleted successfully";
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Search(string keyword)
+        {
+            if (keyword == null)
+                return RedirectToAction("Index");
+
+            var users = _userRepository.GetByKeyword(keyword);
+            var viewModel = new UserSearchViewModel
+            {
+                Users = users,
+                Keyword = keyword
+            };
+
+            return View(viewModel);
         }
     }
 }

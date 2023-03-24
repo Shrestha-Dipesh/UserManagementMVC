@@ -1,0 +1,16 @@
+﻿<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        jQuery.noConflict(true);
+        $('#userTable').DataTable({
+            searching: false,
+            paging: false,
+            info: false,
+            columnDefs: [
+                { targets: [0, 1, 2, 3, 4], orderable: true },
+                { targets: "_all", orderable: false }
+            ]
+        });
+    });
+</script>
