@@ -9,15 +9,15 @@
 >## Getting Started
 1. Go to the desired directory and run the following command in Git Bash:
 ```bash
-  git clone https://github.com/Shrestha-Dipesh/UserManagementMVC.git
+git clone https://github.com/Shrestha-Dipesh/UserManagementMVC.git
 ```
 
 2. Open the project in Visual Studio and replace the server name (from your SSMS) in appsettings.json.
 ```bash
-  "DefaultConnection": "Server={ServerName};Database=UserManagement;Trusted_Connection=True;Encrypt=False"
+"DefaultConnection": "Server={ServerName};Database=UserManagement;Trusted_Connection=True;Encrypt=False"
 ```
 
 3. Go to Tools > NuGet Package Manager > Package Manager Console and run the following command:
 ```bash
-  Update-Database
+Update-Database
 ```
